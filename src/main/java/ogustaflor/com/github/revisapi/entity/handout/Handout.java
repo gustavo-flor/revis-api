@@ -3,8 +3,6 @@ package ogustaflor.com.github.revisapi.entity.handout;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
-import ogustaflor.com.github.revisapi.entity.StoreEntity;
-import ogustaflor.com.github.revisapi.entity.UpdateEntity;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
 import javax.persistence.*;
@@ -20,7 +18,7 @@ public class Handout extends AbstractPersistableEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(groups = { StoreEntity.class, UpdateEntity.class })
+	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String title;
 	
@@ -28,7 +26,7 @@ public class Handout extends AbstractPersistableEntity {
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	
-	@NotNull(groups = { StoreEntity.class, UpdateEntity.class })
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Topic topic;

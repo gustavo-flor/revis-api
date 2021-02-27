@@ -1,14 +1,11 @@
 package ogustaflor.com.github.revisapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import ogustaflor.com.github.revisapi.entity.StoreEntity;
-import ogustaflor.com.github.revisapi.entity.UpdateEntity;
 import ogustaflor.com.github.revisapi.entity.handout.Handout;
 import ogustaflor.com.github.revisapi.service.HandoutService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
