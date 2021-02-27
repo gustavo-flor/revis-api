@@ -1,0 +1,14 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:api
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
