@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.util.Set;
 
-public abstract class UserDTO {;
+public abstract class UserDTO {
 	
 	private interface IdField { @Positive Long getId(); }
 	private interface EmailField { @NotBlank String getEmail(); }
@@ -16,7 +16,7 @@ public abstract class UserDTO {;
 	
 	private interface ToEntityMethod { User toEntity(); }
 	
-	public abstract static class Request {;
+	public abstract static class Request {
 		
 		@Value
 		public static class Store implements EmailField, UsernameField, PasswordField, AuthoritiesField, ToEntityMethod {
