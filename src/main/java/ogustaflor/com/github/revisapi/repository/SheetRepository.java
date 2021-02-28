@@ -1,9 +1,9 @@
 package ogustaflor.com.github.revisapi.repository;
 
-import ogustaflor.com.github.revisapi.entity.handout.Handout;
+import ogustaflor.com.github.revisapi.entity.sheet.Sheet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HandoutRepository extends JpaRepository<Handout, Long> {
+public interface SheetRepository extends JpaRepository<Sheet, Long> {
 	
 	boolean existsByTitle(String title);
 	

@@ -2,12 +2,14 @@ package ogustaflor.com.github.revisapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import ogustaflor.com.github.revisapi.entity.matter.Matter;
+import ogustaflor.com.github.revisapi.entity.matter.MatterDTO;
 import ogustaflor.com.github.revisapi.service.MatterService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -37,15 +39,15 @@ public class MatterController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Matter> store(@RequestBody Matter matter) throws Exception {
-		Matter createdMatter = matterService.insert(matter);
+	public ResponseEntity<Matter> store(@Valid @RequestBody MatterDTO.Request.Store body) throws Exception {
+		Matter createdMatter = matterService.insert(body.toEntity());
 		URI location = URI.create(String.format("/matters/%s", createdMatter.getId()));
 		return ResponseEntity.created(location).body(createdMatter);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Matter> update(@RequestBody Matter matter, @PathVariable Long id) throws Exception {
-		return ResponseEntity.ok(matterService.update(id, matter));
+	public ResponseEntity<Matter> update(@Valid @RequestBody MatterDTO.Request.Update body, @PathVariable Long id) throws Exception {
+		return ResponseEntity.ok(matterService.update(id, body.toEntity()));
 	}
 	
 	@DeleteMapping("/{id}")

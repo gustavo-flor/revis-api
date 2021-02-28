@@ -1,7 +1,6 @@
-package ogustaflor.com.github.revisapi.entity.handout;
+package ogustaflor.com.github.revisapi.entity.sheet;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
@@ -9,10 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 @Entity
-public class Handout extends AbstractPersistableEntity {
+public class Sheet extends AbstractPersistableEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

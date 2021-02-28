@@ -1,15 +1,14 @@
 package ogustaflor.com.github.revisapi.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import ogustaflor.com.github.revisapi.entity.AbstractAuthenticableEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
@@ -20,15 +19,12 @@ public class User extends AbstractAuthenticableEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String email;
 	
-	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String username;
 	
-	@NotBlank
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(nullable = false)
 	private String password;

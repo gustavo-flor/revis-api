@@ -2,8 +2,7 @@ package ogustaflor.com.github.revisapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import ogustaflor.com.github.revisapi.entity.user.User;
-import ogustaflor.com.github.revisapi.entity.user.dto.UserStoreDTO;
-import ogustaflor.com.github.revisapi.entity.user.dto.UserUpdateDTO;
+import ogustaflor.com.github.revisapi.entity.user.UserDTO;
 import ogustaflor.com.github.revisapi.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,15 +39,15 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> store(@Valid @RequestBody UserStoreDTO user) throws Exception {
-		User createdUser = userService.insert(user.toEntity());
+	public ResponseEntity<User> store(@Valid @RequestBody UserDTO.Request.Store body) throws Exception {
+		User createdUser = userService.insert(body.toEntity());
 		URI location = URI.create(String.format("/users/%s", createdUser.getId()));
 		return ResponseEntity.created(location).body(createdUser);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@Valid @RequestBody UserUpdateDTO user, @PathVariable Long id) throws Exception {
-		return ResponseEntity.ok(userService.update(id, user.toEntity()));
+	public ResponseEntity<User> update(@Valid @RequestBody UserDTO.Request.Update body, @PathVariable Long id) throws Exception {
+		return ResponseEntity.ok(userService.update(id, body.toEntity()));
 	}
 	
 	@DeleteMapping("/{id}")

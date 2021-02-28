@@ -2,7 +2,7 @@ package ogustaflor.com.github.revisapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
-import ogustaflor.com.github.revisapi.entity.topic.dto.TopicDTO;
+import ogustaflor.com.github.revisapi.entity.topic.TopicDTO;
 import ogustaflor.com.github.revisapi.service.TopicService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,15 +39,15 @@ public class TopicController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Topic> store(@Valid @RequestBody TopicDTO topic) {
-		Topic createdTopic = topicService.insert(topic.toEntity());
+	public ResponseEntity<Topic> store(@Valid @RequestBody TopicDTO.Request.Store body) {
+		Topic createdTopic = topicService.insert(body.toEntity());
 		URI location = URI.create(String.format("/topics/%s", createdTopic.getId()));
 		return ResponseEntity.created(location).body(createdTopic);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Topic> update(@Valid @RequestBody TopicDTO matter, @PathVariable Long id) throws Exception {
-		return ResponseEntity.ok(topicService.update(id, matter.toEntity()));
+	public ResponseEntity<Topic> update(@Valid @RequestBody TopicDTO.Request.Update body, @PathVariable Long id) throws Exception {
+		return ResponseEntity.ok(topicService.update(id, body.toEntity()));
 	}
 	
 	@DeleteMapping("/{id}")
