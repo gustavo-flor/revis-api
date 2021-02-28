@@ -1,13 +1,11 @@
 package ogustaflor.com.github.revisapi.entity.topic;
 
-import lombok.Value;
-import ogustaflor.com.github.revisapi.entity.sheet.Sheet;
+import lombok.Data;
 import ogustaflor.com.github.revisapi.entity.matter.Matter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.util.Set;
 
 public abstract class TopicDTO {
 	
@@ -19,11 +17,10 @@ public abstract class TopicDTO {
 	
 	public abstract static class Request {
 		
-		@Value
-		public static class Store implements NameField, MatterField, ToEntityMethod {
-			String name;
-			Matter matter;
-			Set<Sheet> sheets;
+		@Data
+		public static class TopicStore implements NameField, MatterField, ToEntityMethod {
+			@NotBlank String name;
+			@NotNull Matter matter;
 			
 			@Override
 			public Topic toEntity() {
@@ -34,11 +31,10 @@ public abstract class TopicDTO {
 			}
 		}
 		
-		@Value
-		public static class Update implements NameField, MatterField, ToEntityMethod {
-			String name;
-			Matter matter;
-			Set<Sheet> sheets;
+		@Data
+		public static class TopicUpdate implements NameField, MatterField, ToEntityMethod {
+			@NotBlank String name;
+			@NotNull Matter matter;
 			
 			@Override
 			public Topic toEntity() {

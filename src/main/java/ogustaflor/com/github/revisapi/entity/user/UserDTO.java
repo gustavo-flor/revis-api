@@ -1,6 +1,6 @@
 package ogustaflor.com.github.revisapi.entity.user;
 
-import lombok.Value;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -18,11 +18,11 @@ public abstract class UserDTO {
 	
 	public abstract static class Request {
 		
-		@Value
-		public static class Store implements EmailField, UsernameField, PasswordField, AuthoritiesField, ToEntityMethod {
-			String email;
-			String username;
-			String password;
+		@Data
+		public static class UserStore implements EmailField, UsernameField, PasswordField, AuthoritiesField, ToEntityMethod {
+			@NotBlank String email;
+			@NotBlank String username;
+			@NotBlank String password;
 			Set<Role> authorities;
 			
 			@Override
@@ -36,10 +36,10 @@ public abstract class UserDTO {
 			}
 		}
 		
-		@Value
-		public static class Update implements EmailField, UsernameField, AuthoritiesField, ToEntityMethod {
-			String email;
-			String username;
+		@Data
+		public static class UserUpdate implements EmailField, UsernameField, AuthoritiesField, ToEntityMethod {
+			@NotBlank String email;
+			@NotBlank String username;
 			Set<Role> authorities;
 			
 			@Override

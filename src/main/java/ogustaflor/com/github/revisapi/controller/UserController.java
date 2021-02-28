@@ -40,14 +40,14 @@ public class UserController {
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> store(@Valid @RequestBody UserDTO.Request.Store body) throws Exception {
+	public ResponseEntity<User> store(@Valid @RequestBody UserDTO.Request.UserStore body) throws Exception {
 		User createdUser = userService.insert(body.toEntity());
 		URI location = URI.create(String.format("/users/%s", createdUser.getId()));
 		return ResponseEntity.created(location).body(createdUser);
 	}
 	
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> update(@Valid @RequestBody UserDTO.Request.Update body, @PathVariable Long id) throws Exception {
+	public ResponseEntity<User> update(@Valid @RequestBody UserDTO.Request.UserUpdate body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(userService.update(id, body.toEntity()));
 	}
 	

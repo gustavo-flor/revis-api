@@ -1,6 +1,6 @@
 package ogustaflor.com.github.revisapi.entity.matter;
 
-import lombok.Value;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -14,9 +14,9 @@ public abstract class MatterDTO {
 	
 	public abstract static class Request {
 		
-		@Value
-		public static class Store implements NameField, ToEntityMethod {
-			String name;
+		@Data
+		public static class MatterStore implements NameField, ToEntityMethod {
+			@NotBlank String name;
 			
 			@Override
 			public Matter toEntity() {
@@ -24,9 +24,9 @@ public abstract class MatterDTO {
 			}
 		}
 		
-		@Value
-		public static class Update implements NameField, ToEntityMethod {
-			String name;
+		@Data
+		public static class MatterUpdate implements NameField, ToEntityMethod {
+			@NotBlank String name;
 			
 			@Override
 			public Matter toEntity() {

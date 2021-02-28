@@ -4,6 +4,7 @@ import lombok.*;
 import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class Matter extends AbstractPersistableEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String name;
 	

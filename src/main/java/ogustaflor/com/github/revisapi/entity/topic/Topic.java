@@ -5,6 +5,8 @@ import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
 import ogustaflor.com.github.revisapi.entity.matter.Matter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,11 +20,13 @@ public class Topic extends AbstractPersistableEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	@Column(nullable = false)
 	private String name;
 	
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Matter matter;
 	
 }

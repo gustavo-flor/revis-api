@@ -40,14 +40,14 @@ public class SheetController {
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Sheet> store(@Valid @RequestBody SheetDTO.Request.Store body) throws Exception {
+	public ResponseEntity<Sheet> store(@Valid @RequestBody SheetDTO.Request.SheetStore body) throws Exception {
 		Sheet createdSheet = sheetService.insert(body.toEntity());
 		URI location = URI.create(String.format("/sheets/%s", createdSheet.getId()));
 		return ResponseEntity.created(location).body(createdSheet);
 	}
 	
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Sheet> update(@Valid @RequestBody SheetDTO.Request.Update body, @PathVariable Long id) throws Exception {
+	public ResponseEntity<Sheet> update(@Valid @RequestBody SheetDTO.Request.SheetUpdate body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(sheetService.update(id, body.toEntity()));
 	}
 	

@@ -1,6 +1,6 @@
 package ogustaflor.com.github.revisapi.entity.sheet;
 
-import lombok.Value;
+import lombok.Data;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
 import javax.validation.constraints.NotBlank;
@@ -18,11 +18,11 @@ public abstract class SheetDTO {
 	
 	public abstract static class Request {
 		
-		@Value
-		public static class Store implements TitleField, LevelField, TopicField, ToEntityMethod {
-			String title;
-			Level level;
-			Topic topic;
+		@Data
+		public static class SheetStore implements TitleField, LevelField, TopicField, ToEntityMethod {
+			@NotBlank String title;
+			@NotNull Level level;
+			@NotNull Topic topic;
 			
 			@Override
 			public Sheet toEntity() {
@@ -34,11 +34,11 @@ public abstract class SheetDTO {
 			}
 		}
 		
-		@Value
-		public static class Update implements TitleField, LevelField, TopicField, ToEntityMethod {
-			String title;
-			Level level;
-			Topic topic;
+		@Data
+		public static class SheetUpdate implements TitleField, LevelField, TopicField, ToEntityMethod {
+			@NotBlank String title;
+			@NotNull Level level;
+			@NotNull Topic topic;
 			
 			@Override
 			public Sheet toEntity() {

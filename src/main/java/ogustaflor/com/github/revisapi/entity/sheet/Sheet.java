@@ -24,13 +24,14 @@ public class Sheet extends AbstractPersistableEntity {
 	@Column(nullable = false, unique = true)
 	private String title;
 	
-	@Column
+	@NotNull
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Topic topic;
 	
 }

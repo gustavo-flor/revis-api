@@ -40,14 +40,14 @@ public class MatterController {
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Matter> store(@Valid @RequestBody MatterDTO.Request.Store body) throws Exception {
+	public ResponseEntity<Matter> store(@Valid @RequestBody MatterDTO.Request.MatterStore body) throws Exception {
 		Matter createdMatter = matterService.insert(body.toEntity());
 		URI location = URI.create(String.format("/matters/%s", createdMatter.getId()));
 		return ResponseEntity.created(location).body(createdMatter);
 	}
 	
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Matter> update(@Valid @RequestBody MatterDTO.Request.Update body, @PathVariable Long id) throws Exception {
+	public ResponseEntity<Matter> update(@Valid @RequestBody MatterDTO.Request.MatterUpdate body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(matterService.update(id, body.toEntity()));
 	}
 	

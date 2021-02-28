@@ -40,14 +40,14 @@ public class TopicController {
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Topic> store(@Valid @RequestBody TopicDTO.Request.Store body) {
+	public ResponseEntity<Topic> store(@Valid @RequestBody TopicDTO.Request.TopicStore body) {
 		Topic createdTopic = topicService.insert(body.toEntity());
 		URI location = URI.create(String.format("/topics/%s", createdTopic.getId()));
 		return ResponseEntity.created(location).body(createdTopic);
 	}
 	
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Topic> update(@Valid @RequestBody TopicDTO.Request.Update body, @PathVariable Long id) throws Exception {
+	public ResponseEntity<Topic> update(@Valid @RequestBody TopicDTO.Request.TopicUpdate body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(topicService.update(id, body.toEntity()));
 	}
 	
