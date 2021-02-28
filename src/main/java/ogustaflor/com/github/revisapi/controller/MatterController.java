@@ -6,6 +6,7 @@ import ogustaflor.com.github.revisapi.entity.matter.MatterDTO;
 import ogustaflor.com.github.revisapi.service.MatterService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,32 +21,32 @@ public class MatterController {
 	
 	private final MatterService matterService;
 	
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Matter>> index() {
 		return ResponseEntity.ok(matterService.findAll());
 	}
 	
-	@GetMapping("/pageable")
+	@GetMapping(value = "/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<Matter>> pageable(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 												 @RequestParam(name = "size", required = false, defaultValue = "8") int size) {
 		return ResponseEntity.ok(matterService.paginate(PageRequest.of(page, size)));
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Matter> show(@PathVariable Long id) {
 		return matterService.findById(id)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.noContent().build());
 	}
 	
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Matter> store(@Valid @RequestBody MatterDTO.Request.Store body) throws Exception {
 		Matter createdMatter = matterService.insert(body.toEntity());
 		URI location = URI.create(String.format("/matters/%s", createdMatter.getId()));
 		return ResponseEntity.created(location).body(createdMatter);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Matter> update(@Valid @RequestBody MatterDTO.Request.Update body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(matterService.update(id, body.toEntity()));
 	}
@@ -56,7 +57,7 @@ public class MatterController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/is-being-used/{name}")
+	@GetMapping(value = "/is-being-used/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> isBeingUsed(@PathVariable String name) {
 		return ResponseEntity.ok(matterService.isBeingUsed(name));
 	}

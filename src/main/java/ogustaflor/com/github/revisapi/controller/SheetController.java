@@ -6,6 +6,7 @@ import ogustaflor.com.github.revisapi.entity.sheet.SheetDTO;
 import ogustaflor.com.github.revisapi.service.SheetService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,27 +26,27 @@ public class SheetController {
 		return ResponseEntity.ok(sheetService.findAll());
 	}
 	
-	@GetMapping("/pageable")
+	@GetMapping(value = "/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<Sheet>> pageable(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 												@RequestParam(name = "size", required = false, defaultValue = "8") int size) {
 		return ResponseEntity.ok(sheetService.paginate(PageRequest.of(page, size)));
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Sheet> show(@PathVariable Long id) {
 		return sheetService.findById(id)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.noContent().build());
 	}
 	
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Sheet> store(@Valid @RequestBody SheetDTO.Request.Store body) throws Exception {
 		Sheet createdSheet = sheetService.insert(body.toEntity());
 		URI location = URI.create(String.format("/sheets/%s", createdSheet.getId()));
 		return ResponseEntity.created(location).body(createdSheet);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Sheet> update(@Valid @RequestBody SheetDTO.Request.Update body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(sheetService.update(id, body.toEntity()));
 	}
@@ -56,7 +57,7 @@ public class SheetController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/is-being-used/{title}")
+	@GetMapping(value = "/is-being-used/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> isBeingUsed(@PathVariable String title) {
 		return ResponseEntity.ok(sheetService.isBeingUsed(title));
 	}

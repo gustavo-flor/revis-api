@@ -6,6 +6,7 @@ import ogustaflor.com.github.revisapi.entity.topic.TopicDTO;
 import ogustaflor.com.github.revisapi.service.TopicService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,27 +26,27 @@ public class TopicController {
 		return ResponseEntity.ok(topicService.findAll());
 	}
 	
-	@GetMapping("/pageable")
+	@GetMapping(value = "/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<Topic>> pageable(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 												@RequestParam(name = "size", required = false, defaultValue = "8") int size) {
 		return ResponseEntity.ok(topicService.paginate(PageRequest.of(page, size)));
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Topic> show(@PathVariable Long id) {
 		return topicService.findById(id)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.noContent().build());
 	}
 	
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Topic> store(@Valid @RequestBody TopicDTO.Request.Store body) {
 		Topic createdTopic = topicService.insert(body.toEntity());
 		URI location = URI.create(String.format("/topics/%s", createdTopic.getId()));
 		return ResponseEntity.created(location).body(createdTopic);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Topic> update(@Valid @RequestBody TopicDTO.Request.Update body, @PathVariable Long id) throws Exception {
 		return ResponseEntity.ok(topicService.update(id, body.toEntity()));
 	}
