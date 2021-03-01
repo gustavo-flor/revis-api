@@ -63,9 +63,8 @@ public class UserController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> destroy(@PathVariable Long id) {
+	public void destroy(@PathVariable Long id) {
 		userService.deleteById(id);
-		return ResponseEntity.noContent().build();
 	}
 	
 	@ResponseStatus(HttpStatus.OK)

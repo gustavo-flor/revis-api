@@ -63,9 +63,8 @@ public class MatterController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> destroy(@PathVariable Long id) {
+	public void destroy(@PathVariable Long id) {
 		matterService.deleteById(id);
-		return ResponseEntity.noContent().build();
 	}
 	
 	@ResponseStatus(HttpStatus.OK)

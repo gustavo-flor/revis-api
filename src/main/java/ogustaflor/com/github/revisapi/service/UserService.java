@@ -50,9 +50,7 @@ public class UserService implements UserDetailsService {
 		user.setId(id);
 		user.setPassword(savedUser.getPassword());
 		
-		userRepository.saveAndFlush(user);
-		
-		return user;
+		return userRepository.saveAndFlush(user);
 	}
 	
 	public void deleteById(Long id) {

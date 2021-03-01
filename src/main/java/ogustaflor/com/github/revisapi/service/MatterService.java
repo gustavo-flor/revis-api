@@ -50,9 +50,8 @@ public class MatterService {
 		}
 		
 		matter.setId(id);
-		matterRepository.saveAndFlush(matter);
 		
-		return matter;
+		return matterRepository.saveAndFlush(matter);
 	}
 	
 	public boolean isBeingUsed(String name) {

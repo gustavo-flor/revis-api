@@ -63,9 +63,8 @@ public class TopicController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> destroy(@PathVariable Long id) {
+	public void destroy(@PathVariable Long id) {
 		topicService.deleteById(id);
-		return ResponseEntity.noContent().build();
 	}
 	
 }

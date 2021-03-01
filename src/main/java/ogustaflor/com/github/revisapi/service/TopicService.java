@@ -45,9 +45,8 @@ public class TopicService {
 		}
 		
 		matter.setId(id);
-		topicRepository.saveAndFlush(matter);
 		
-		return matter;
+		return topicRepository.saveAndFlush(matter);
 	}
 	
 }

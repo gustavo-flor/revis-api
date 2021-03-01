@@ -48,10 +48,7 @@ public class SheetService {
 			throw new Exception();
 		}
 		
-		sheet.setId(id);
-		sheetRepository.saveAndFlush(sheet);
-		
-		return sheet;
+		return sheetRepository.saveAndFlush(sheet);
 	}
 	
 	public boolean isBeingUsed(String title) {
