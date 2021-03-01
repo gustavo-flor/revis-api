@@ -1,6 +1,7 @@
 package ogustaflor.com.github.revisapi.entity.question;
 
 import lombok.Data;
+import ogustaflor.com.github.revisapi.entity.PersistableEntityDetail;
 import ogustaflor.com.github.revisapi.entity.alternative.Alternative;
 import ogustaflor.com.github.revisapi.entity.alternative.AlternativeDTO;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
@@ -23,14 +24,18 @@ public abstract class QuestionDTO {
 		
 		@Data
 		public static class QuestionStore implements ContentField, AlternativesField, TopicField, ToEntityMethod {
-			@NotBlank String content;
-			@NotEmpty Set<AlternativeDTO.Request.AlternativeStore> alternatives;
-			@NotNull Topic topic;
+			@NotBlank private String content;
+			@NotEmpty private Set<AlternativeDTO.Request.AlternativeStore> alternatives;
+			@NotNull private PersistableEntityDetail topic;
 			
 			public Set<Alternative> getAlternatives() {
 				return alternatives.stream()
 						.map(AlternativeDTO.Request.AlternativeStore::toEntity)
 						.collect(Collectors.toSet());
+			}
+			
+			public Topic getTopic() {
+				return Topic.builder().id(topic.getId()).build();
 			}
 			
 			@Override
@@ -45,14 +50,18 @@ public abstract class QuestionDTO {
 		
 		@Data
 		public static class QuestionUpdate implements ContentField, AlternativesField, TopicField, ToEntityMethod {
-			@NotBlank String content;
-			@NotEmpty Set<AlternativeDTO.Request.AlternativeUpdate> alternatives;
-			@NotNull Topic topic;
+			@NotBlank private String content;
+			@NotEmpty private Set<AlternativeDTO.Request.AlternativeUpdate> alternatives;
+			@NotNull private PersistableEntityDetail topic;
 			
 			public Set<Alternative> getAlternatives() {
 				return alternatives.stream()
 						.map(AlternativeDTO.Request.AlternativeUpdate::toEntity)
 						.collect(Collectors.toSet());
+			}
+			
+			public Topic getTopic() {
+				return Topic.builder().id(topic.getId()).build();
 			}
 			
 			@Override

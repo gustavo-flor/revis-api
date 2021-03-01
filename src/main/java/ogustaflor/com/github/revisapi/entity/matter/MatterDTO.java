@@ -14,7 +14,7 @@ public abstract class MatterDTO {
 		
 		@Data
 		public static class MatterStore implements NameField, ToEntityMethod {
-			@NotBlank String name;
+			@NotBlank private String name;
 			
 			@Override
 			public Matter toEntity() {
@@ -24,7 +24,7 @@ public abstract class MatterDTO {
 		
 		@Data
 		public static class MatterUpdate implements NameField, ToEntityMethod {
-			@NotBlank String name;
+			@NotBlank private String name;
 			
 			@Override
 			public Matter toEntity() {

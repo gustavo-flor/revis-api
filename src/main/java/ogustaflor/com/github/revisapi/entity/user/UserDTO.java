@@ -18,10 +18,10 @@ public abstract class UserDTO {
 		
 		@Data
 		public static class UserStore implements EmailField, UsernameField, PasswordField, AuthoritiesField, ToEntityMethod {
-			@NotBlank String email;
-			@NotBlank String username;
-			@NotBlank String password;
-			Set<Role> authorities;
+			@NotBlank private String email;
+			@NotBlank private String username;
+			@NotBlank private String password;
+			private Set<Role> authorities;
 			
 			@Override
 			public User toEntity() {
@@ -36,9 +36,9 @@ public abstract class UserDTO {
 		
 		@Data
 		public static class UserUpdate implements EmailField, UsernameField, AuthoritiesField, ToEntityMethod {
-			@NotBlank String email;
-			@NotBlank String username;
-			Set<Role> authorities;
+			@NotBlank private String email;
+			@NotBlank private String username;
+			private Set<Role> authorities;
 			
 			@Override
 			public User toEntity() {

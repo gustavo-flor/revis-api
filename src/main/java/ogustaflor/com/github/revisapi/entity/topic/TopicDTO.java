@@ -1,6 +1,7 @@
 package ogustaflor.com.github.revisapi.entity.topic;
 
 import lombok.Data;
+import ogustaflor.com.github.revisapi.entity.PersistableEntityDetail;
 import ogustaflor.com.github.revisapi.entity.matter.Matter;
 
 import javax.validation.constraints.NotBlank;
@@ -17,8 +18,12 @@ public abstract class TopicDTO {
 		
 		@Data
 		public static class TopicStore implements NameField, MatterField, ToEntityMethod {
-			@NotBlank String name;
-			@NotNull Matter matter;
+			@NotBlank private String name;
+			@NotNull private PersistableEntityDetail matter;
+			
+			public Matter getMatter() {
+				return Matter.builder().id(matter.getId()).build();
+			}
 			
 			@Override
 			public Topic toEntity() {
@@ -31,8 +36,12 @@ public abstract class TopicDTO {
 		
 		@Data
 		public static class TopicUpdate implements NameField, MatterField, ToEntityMethod {
-			@NotBlank String name;
-			@NotNull Matter matter;
+			@NotBlank private String name;
+			@NotNull private PersistableEntityDetail matter;
+			
+			public Matter getMatter() {
+				return Matter.builder().id(matter.getId()).build();
+			}
 			
 			@Override
 			public Topic toEntity() {

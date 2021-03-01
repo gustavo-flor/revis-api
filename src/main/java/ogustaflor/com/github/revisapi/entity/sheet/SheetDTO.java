@@ -1,6 +1,7 @@
 package ogustaflor.com.github.revisapi.entity.sheet;
 
 import lombok.Data;
+import ogustaflor.com.github.revisapi.entity.PersistableEntityDetail;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
 import javax.validation.constraints.NotBlank;
@@ -18,9 +19,13 @@ public abstract class SheetDTO {
 		
 		@Data
 		public static class SheetStore implements TitleField, LevelField, TopicField, ToEntityMethod {
-			@NotBlank String title;
-			@NotNull Level level;
-			@NotNull Topic topic;
+			@NotBlank private String title;
+			@NotNull private Level level;
+			@NotNull private PersistableEntityDetail topic;
+			
+			public Topic getTopic() {
+				return Topic.builder().id(topic.getId()).build();
+			}
 			
 			@Override
 			public Sheet toEntity() {
@@ -34,9 +39,13 @@ public abstract class SheetDTO {
 		
 		@Data
 		public static class SheetUpdate implements TitleField, LevelField, TopicField, ToEntityMethod {
-			@NotBlank String title;
-			@NotNull Level level;
-			@NotNull Topic topic;
+			@NotBlank private String title;
+			@NotNull private Level level;
+			@NotNull private PersistableEntityDetail topic;
+			
+			public Topic getTopic() {
+				return Topic.builder().id(topic.getId()).build();
+			}
 			
 			@Override
 			public Sheet toEntity() {
