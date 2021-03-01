@@ -5,14 +5,12 @@ import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public abstract class SheetDTO {
 	
-	private interface IdField { @Positive Long getId(); }
-	private interface TitleField { @NotBlank String getTitle(); }
-	private interface LevelField { @NotNull Level getLevel(); }
-	private interface TopicField { @NotNull Topic getTopic(); }
+	private interface TitleField { String getTitle(); }
+	private interface LevelField { Level getLevel(); }
+	private interface TopicField { Topic getTopic(); }
 	
 	private interface ToEntityMethod { Sheet toEntity(); }
 	

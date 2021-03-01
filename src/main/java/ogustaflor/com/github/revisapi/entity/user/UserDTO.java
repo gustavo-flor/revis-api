@@ -3,15 +3,13 @@ package ogustaflor.com.github.revisapi.entity.user;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import java.util.Set;
 
 public abstract class UserDTO {
 	
-	private interface IdField { @Positive Long getId(); }
-	private interface EmailField { @NotBlank String getEmail(); }
-	private interface UsernameField { @NotBlank String getUsername(); }
-	private interface PasswordField { @NotBlank String getPassword(); }
+	private interface EmailField { String getEmail(); }
+	private interface UsernameField { String getUsername(); }
+	private interface PasswordField { String getPassword(); }
 	private interface AuthoritiesField { Set<Role> getAuthorities(); }
 	
 	private interface ToEntityMethod { User toEntity(); }

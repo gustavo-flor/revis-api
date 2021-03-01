@@ -25,6 +25,6 @@ public class Alternative extends AbstractPersistableEntity {
 	
 	@NotNull
 	@Column(nullable = false)
-	private Boolean correct;
+	private boolean correct;
 	
 }

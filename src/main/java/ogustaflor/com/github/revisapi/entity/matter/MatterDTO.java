@@ -3,12 +3,10 @@ package ogustaflor.com.github.revisapi.entity.matter;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 public abstract class MatterDTO {
 	
-	private interface IdField { @Positive Long getId(); }
-	private interface NameField { @NotBlank String getName(); }
+	private interface NameField { String getName(); }
 	
 	private interface ToEntityMethod { Matter toEntity(); }
 	

@@ -5,13 +5,11 @@ import ogustaflor.com.github.revisapi.entity.matter.Matter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public abstract class TopicDTO {
 	
-	private interface IdField { @Positive Long getId(); }
-	private interface NameField { @NotBlank String getName(); }
-	private interface MatterField { @NotNull Matter getMatter(); }
+	private interface NameField { String getName(); }
+	private interface MatterField { Matter getMatter(); }
 	
 	private interface ToEntityMethod { Topic toEntity(); }
 	

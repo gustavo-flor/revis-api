@@ -3,6 +3,7 @@ package ogustaflor.com.github.revisapi.entity.question;
 import lombok.*;
 import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
 import ogustaflor.com.github.revisapi.entity.alternative.Alternative;
+import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -33,5 +34,10 @@ public class Question extends AbstractPersistableEntity {
 	@NotNull
 	@Column(nullable = false)
 	private boolean reviewed;
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(nullable = false)
+	private Topic topic;
 	
 }
