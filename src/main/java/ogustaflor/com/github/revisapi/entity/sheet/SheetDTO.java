@@ -1,6 +1,8 @@
 package ogustaflor.com.github.revisapi.entity.sheet;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import ogustaflor.com.github.revisapi.entity.AbstractRequest;
 import ogustaflor.com.github.revisapi.entity.PersistableEntityDetail;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
 
@@ -13,12 +15,11 @@ public abstract class SheetDTO {
 	private interface LevelField { Level getLevel(); }
 	private interface TopicField { Topic getTopic(); }
 	
-	private interface ToEntityMethod { Sheet toEntity(); }
-	
 	public abstract static class Request {
 		
+		@EqualsAndHashCode(callSuper = true)
 		@Data
-		public static class SheetStore implements TitleField, LevelField, TopicField, ToEntityMethod {
+		public static class SheetStore extends AbstractRequest<Sheet> implements TitleField, LevelField, TopicField {
 			@NotBlank private String title;
 			@NotNull private Level level;
 			@NotNull private PersistableEntityDetail topic;
@@ -37,8 +38,9 @@ public abstract class SheetDTO {
 			}
 		}
 		
+		@EqualsAndHashCode(callSuper = true)
 		@Data
-		public static class SheetUpdate implements TitleField, LevelField, TopicField, ToEntityMethod {
+		public static class SheetUpdate extends AbstractRequest<Sheet> implements TitleField, LevelField, TopicField {
 			@NotBlank private String title;
 			@NotNull private Level level;
 			@NotNull private PersistableEntityDetail topic;

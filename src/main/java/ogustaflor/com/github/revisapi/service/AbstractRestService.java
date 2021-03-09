@@ -24,7 +24,7 @@ public abstract class AbstractRestService<E extends Persistable<Long>, R extends
 		return repository.findById(id);
 	}
 	
-	public E insert(E entity) {
+	public E insert(E entity) throws Exception {
 		if (entity.isNew()) {
 			throw new UnsupportedOperationException();
 		}
@@ -32,7 +32,7 @@ public abstract class AbstractRestService<E extends Persistable<Long>, R extends
 		return repository.saveAndFlush(entity);
 	}
 	
-	public E update(Long id, E entity) {
+	public E update(Long id, E entity) throws Exception {
 		if (!repository.existsById(id)) {
 			throw new UnsupportedOperationException();
 		}

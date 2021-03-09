@@ -1,6 +1,8 @@
 package ogustaflor.com.github.revisapi.entity.alternative;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import ogustaflor.com.github.revisapi.entity.AbstractRequest;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -10,13 +12,12 @@ public abstract class AlternativeDTO {
 	
 	private interface ContentField { @NotBlank String getContent(); }
 	private interface CorrectField { @NotEmpty boolean isCorrect(); }
-	
-	private interface ToEntityMethod { Alternative toEntity(); }
-	
+
 	public abstract static class Request {
 		
+		@EqualsAndHashCode(callSuper = true)
 		@Data
-		public static class AlternativeStore implements ContentField, CorrectField, ToEntityMethod {
+		public static class AlternativeStore extends AbstractRequest<Alternative> implements ContentField, CorrectField {
 			@NotBlank private String content;
 			@NotNull private boolean correct;
 			
@@ -29,8 +30,9 @@ public abstract class AlternativeDTO {
 			}
 		}
 		
+		@EqualsAndHashCode(callSuper = true)
 		@Data
-		public static class AlternativeUpdate implements ContentField, CorrectField, ToEntityMethod {
+		public static class AlternativeUpdate extends AbstractRequest<Alternative> implements ContentField, CorrectField {
 			@NotBlank private String content;
 			@NotNull private boolean correct;
 			
