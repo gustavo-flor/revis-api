@@ -3,6 +3,7 @@ package ogustaflor.com.github.revisapi.entity.alternative;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import ogustaflor.com.github.revisapi.entity.AbstractRequest;
+import ogustaflor.com.github.revisapi.entity.user.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -10,8 +11,8 @@ import javax.validation.constraints.NotNull;
 
 public abstract class AlternativeDTO {
 	
-	private interface ContentField { @NotBlank String getContent(); }
-	private interface CorrectField { @NotEmpty boolean isCorrect(); }
+	private interface ContentField { String getContent(); }
+	private interface CorrectField { boolean isCorrect(); }
 
 	public abstract static class Request {
 		

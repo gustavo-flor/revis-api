@@ -1,7 +1,7 @@
 package ogustaflor.com.github.revisapi.entity.matter;
 
 import lombok.*;
-import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
+import ogustaflor.com.github.revisapi.entity.AbstractAuditableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +12,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 @Entity
-public class Matter extends AbstractPersistableEntity {
+@Table(name = "matters")
+public class Matter extends AbstractAuditableEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

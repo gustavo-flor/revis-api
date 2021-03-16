@@ -14,7 +14,8 @@ import java.util.Set;
 @Data
 @Builder
 @Entity
-public class User extends AbstractAuthenticableEntity {
+@Table(name = "users")
+public class User extends AbstractAuthenticableEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +34,8 @@ public class User extends AbstractAuthenticableEntity {
 	@Column(nullable = false)
 	private String password;
 	
-	@ElementCollection(targetClass = Role.class)
-	@CollectionTable
+	@ElementCollection(fetch = FetchType.LAZY, targetClass = Role.class)
+	@CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
 	private Set<Role> authorities;
 	

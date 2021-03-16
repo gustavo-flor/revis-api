@@ -5,7 +5,7 @@ import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
 
-public abstract class AbstractPersistableEntity implements Persistable<Long>, Serializable {
+public abstract class AbstractPersistableEntity<ID> implements Persistable<ID>, Serializable {
 	
 	@JsonIgnore
 	@Override

@@ -16,8 +16,8 @@ public class QuestionController extends AbstractRestController<Question, Questio
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping(value = "/{id}/review", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> review(@PathVariable Long id) {
-		service.review(id);
+	public ResponseEntity<Void> review(@PathVariable Long id, @RequestParam(name = "reviewerId") Long reviewerId) {
+		service.review(id, reviewerId);
 		return ResponseEntity.noContent().build();
 	}
 	

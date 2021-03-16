@@ -3,7 +3,7 @@ package ogustaflor.com.github.revisapi.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public abstract class AbstractAuthenticableEntity extends AbstractPersistableEntity implements UserDetails {
+public abstract class AbstractAuthenticableEntity<ID> extends AbstractPersistableEntity<ID> implements UserDetails {
 	
 	@JsonIgnore
 	@Override

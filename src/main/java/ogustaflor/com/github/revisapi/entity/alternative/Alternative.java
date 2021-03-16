@@ -1,7 +1,8 @@
 package ogustaflor.com.github.revisapi.entity.alternative;
 
 import lombok.*;
-import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
+import ogustaflor.com.github.revisapi.entity.AbstractAuditableEntity;
+import ogustaflor.com.github.revisapi.entity.question.Question;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +14,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 @Entity
-public class Alternative extends AbstractPersistableEntity {
+@Table(name = "alternatives")
+public class Alternative extends AbstractAuditableEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +28,10 @@ public class Alternative extends AbstractPersistableEntity {
 	@NotNull
 	@Column(nullable = false)
 	private boolean correct;
+
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "question_id", nullable = false)
+	private Question question;
 	
 }

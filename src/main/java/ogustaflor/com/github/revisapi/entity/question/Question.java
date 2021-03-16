@@ -1,9 +1,10 @@
 package ogustaflor.com.github.revisapi.entity.question;
 
 import lombok.*;
-import ogustaflor.com.github.revisapi.entity.AbstractPersistableEntity;
+import ogustaflor.com.github.revisapi.entity.AbstractAuditableEntity;
 import ogustaflor.com.github.revisapi.entity.alternative.Alternative;
 import ogustaflor.com.github.revisapi.entity.topic.Topic;
+import ogustaflor.com.github.revisapi.entity.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +18,8 @@ import java.util.Set;
 @Data
 @Builder
 @Entity
-public class Question extends AbstractPersistableEntity {
+@Table(name = "questions")
+public class Question extends AbstractAuditableEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +30,17 @@ public class Question extends AbstractPersistableEntity {
 	private String content;
 	
 	@NotEmpty
-	@OneToMany(cascade = { CascadeType.PERSIST })
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@JoinColumn(name = "question_id")
 	private Set<Alternative> alternatives;
 	
 	@NotNull
-	@Column(nullable = false)
-	private boolean reviewed;
-	
-	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "topic_id", nullable = false)
 	private Topic topic;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reviewed_by", nullable = false)
+	private User reviewedBy;
 	
 }
